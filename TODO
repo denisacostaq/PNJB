@@ -1,0 +1,58 @@
+========
+ERRORES:
+========
+
+-	Arreglar los memory leaks:
+
+	*	Resolver todos los problemas de memoria de la vercion actual, no se
+		trata solo de errores que pudieron quedar,  se trata de que no se hace
+		ningun manejo de memoria. Usar retain(),  release(),  autorelease().
+
+	*	Arreglar ej "jump", los saltos no deben ser controlados por un planificador,
+		si no por el collition listener
+
+
+=======================
+NUEVAS FUNCIONALIDADES:
+=======================
+	
+-	Build
+
+	*	Como descargar y compilar PNJB.
+
+	*	Como crear una apk
+
+-	multi-touch
+
+-	support both retina and non-retina displays
+
+	*	Arreglar todos los problemas referentes al cambio de reoslucion.
+
+-	use bitmap fonts
+
+-	scale, rotate, swing, move, and fade out a sprite
+
+-	create a universal game with Cocos2d-x
+
+-	load and setup a particle system
+
+-	draw primitives (lines, circles, and more) on a CCNode
+
+-	vector math helper methods included in Cocos2d-x
+
+-	create varied terrain for a side-scroller
+
+-	multiple containers inside a CCSpriteBatchNode
+
+-	parallax effect
+
+-	box2d
+
+	*	debug draw feature to quickly test your concepts
+
+-	Load external data
+
+-	Save data using UserDefault
+
+-	game events with notifications
+

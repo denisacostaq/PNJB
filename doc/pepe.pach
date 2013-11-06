@@ -1,0 +1,38 @@
+From c2ecb7e80c611b5c686ed344f5226cc6b4269059 Mon Sep 17 00:00:00 2001
+From: Alvaro Denis <denisacostaq@gmail.com>
+Date: Thu, 31 Oct 2013 03:30:28 -0400
+Subject: [PATCH] Supongo que es un error que cuando la musica este en pause
+te retorne true la llamada a CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying()
+para la plataforma linux
+
+---
+ CocosDenshion/linux/FmodAudioPlayer.cpp | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/CocosDenshion/linux/FmodAudioPlayer.cpp b/CocosDenshion/linux/FmodAudioPlayer.cpp
+index 228eb55..17659b4 100644
+--- a/CocosDenshion/linux/FmodAudioPlayer.cpp
++++ b/CocosDenshion/linux/FmodAudioPlayer.cpp
+@@ -238,11 +238,16 @@ bool FmodAudioPlayer::isBackgroundMusicPlaying() {
+ 	if (pBGMChannel == NULL) {
+ 		return false;
+ 	}
++	
+ 	pSystem->update();
+-	FMOD_RESULT result = pBGMChannel->isPlaying(&bPlaying);
++	FMOD_RESULT result = pBGMChannel->isPlaying(&bPlaying);        
+ 	ERRCHECKWITHEXIT(result);
+-	return bPlaying;
+-
++	
++	bool bPaused = false;
++    result = pBGMChannel->getPaused(&bPaused);
++    ERRCHECKWITHEXIT(result);
++		
++	return bPlaying && !bPaused;
+ }
+ 
+ float FmodAudioPlayer::getBackgroundMusicVolume() {
+-- 
+1.8.4.rc3
+

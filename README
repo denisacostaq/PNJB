@@ -1,0 +1,98 @@
+===============================
+PNJB - PNJB IS NOT JUMMPY BUNNY
+===============================
+
+**Version 0.0.0**
+
+Este es un pequenno juego que muestra el uso de muchas funcionalidades de
+COCOS2D-X y Box2D,  principales frameworks utilizados en su desarrollo.
+
+
+
+Contenido del demo:
+-------------------
+
+*	Cocos2d-x
+
+	- 	CocosDenshion
+
+		*	Carga de sonido.
+
+		*	Ejecucion de sonido en modo background.
+
+		*	Ejecucion de sonido en modo efecto.
+
+	- 	cocos2d
+	
+		*	Carga de imagenes desde un fichero unico,  desde un archivo imajen
+			y desde un sprite sheet con el uso de un plist.
+
+		*	Creacion de Sprites.
+
+		*	Reposicionar un Sprite.
+
+		*	Creacion de CCSprite extendidos (herencia).
+
+		*	Creacion de labels.
+
+		*	Animacion de Sprites con la carga de multiples imagenes.
+
+		*	Primitivas de pintado para el uso de Shaders (ShaderNode).
+
+		*	Creacion de menus.
+
+		*	Creacion de un tutorial de juego.
+
+		*	Creacion de transiciones entre cambio de escenas.
+
+	-	cocos2d::extension
+
+			*	Creacion y ejecucion de acciones sencillas (CCActions).
+
+	- 	Box2D
+
+		*	Configuracion y ejecucion de simulacion con Box2D.
+
+		*	Creacion de cuerpos (b2Body).
+
+		*	Creacion de filtros de coliciones.
+
+		*	Escucha de coliciones (L1CollisionListener).
+
+
+	-	Otros
+
+		*	Tutorial
+
+
+
+Otros autores:
+--------------
+
+En el directorio Resources se encuentra una gran cantidad de imagenes
+y efectos de audio que no son de mi autoria,  si esres quien hizo alguno
+de estos recursos puedes escribir un correo pidiendo se sennale quien es el
+autor original. De todos modos esto se ira actualizando.
+
+
+Build:
+------
+
+./autogen.sh
+
+
+Resources
+---------
+
+1.  `Changelog`_
+2.  `License`_
+3.  `Contributing`_
+4.  `Authors`_
+5.  `Install`_
+
+
+.. _Changelog: ChangeLog
+.. _License: LICENSE
+.. _Contributing: CONTRIBUTING.rst
+.. _Authors: AUTHORS
+.. _Install: INSTALL

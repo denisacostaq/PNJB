@@ -194,7 +194,7 @@ namespace Level1 {
 
         _showingTutorial = true;
 
-        _tutorialLabel = CCLabelTTF::create("", "Times New Roman", 40); //TODO: poner aki una fuente en talla
+        _tutorialLabel = CCLabelTTF::create("", "Times New Roman", 40);
         _tutorialLabel->setPosition(ccp(_winSize.width * 0.5f,
             _winSize.height * 0.7f));
         this->addChild(_tutorialLabel, 20);
@@ -470,13 +470,6 @@ namespace Level1 {
     void L1GameLayer::jumps() {
         if (((L1Bunny*)_player)->isCanJump())
         {
-            //TODO: para que no salte en el aire hay k hacer algo...
-            // 	b2Vec2 velocity = static_cast<L1Bunny*>(_bunny)->getFixture()->
-            // 		GetBody()->GetLinearVelocity();
-            // 		std::cout << velocity.y << std::endl;
-            // 	if (velocity.y <= 0)
-            // 	{
-
             this->schedule(schedule_selector(L1GameLayer::jumpsActions), .2);
             _player->setDisplayFrameWithAnimationName("PlayerAnimation", 1);
             _player->getBody()->ApplyLinearImpulse(b2Vec2(0, 5), b2Vec2(0, 0));
@@ -607,9 +600,13 @@ namespace Level1 {
             if (startMove) {
                 cc_timeval t = transcurredTime(_dinamicTime);
                 long microseconds = t.tv_sec * 1000000 + t.tv_usec;
-                //NOTE: ponerle inteligencia a los brik en el posicionado     
-                float val = (-(_locationStartTousch.x - location.x) /
-                             float(microseconds / 100000));
+                //NOTE: ponerle inteligencia a los brik en el posicionado
+                float den = float(microseconds / 100000);
+                float val = 0;
+                if (den)
+                {
+                    val = (-(_locationStartTousch.x - location.x) / den);
+                }
                 val = val < -500 ? -500 : val;
                 val = val > 500 ? 500 : val;
                 b2Vec2 force(val*.02, 0);

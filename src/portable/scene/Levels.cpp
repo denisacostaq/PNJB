@@ -30,13 +30,16 @@
 
 #include "Levels.h"
 
-Levels::Levels() {
+Levels::Levels()
+{
 }
 
-Levels::Levels(const Levels& orig) {
+Levels::Levels(const Levels& orig)
+{
 }
 
-Levels::~Levels() {
+Levels::~Levels()
+{
 }
 
 bool Levels::init()

@@ -34,6 +34,9 @@
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 
+/*! @brief Abstract class.
+ * @brief This class is only for factory pattern implementation.
+*/
 class Levels : public cocos2d::CCLayer {
 public:
     Levels();

@@ -66,6 +66,6 @@ CCScene* LoadLevel::buildLevel()
     else
     {
         std::cerr << "File not found for User default data" << std::endl;
-        exit (-1);
+        return Level1::L1Menu::scene();
     }
 }

@@ -32,7 +32,7 @@
 #ifndef _APPMACROS_H
 #define _APPMACROS_H
 
-#include "CCFileUtils.h"
+#include "ccMacros.h"
 
 #define CC_OPENGL_VIEW_ cocos2d::CCEGLView::sharedOpenGLView()
 

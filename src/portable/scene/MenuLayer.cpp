@@ -78,16 +78,7 @@ bool MenuLayer::init()
 	
     createScreen ();
 
-    createMenu ();
-
-    createShaders ();
-
-	initActions ();
-
-    initSounds ();
-
-    putGameName ();
-	
+    initSounds ();	
 
 	this->schedule(schedule_selector(MenuLayer::startDance), 7.7);
     
@@ -116,6 +107,14 @@ void MenuLayer::createScreen()
     sprite->setPosition (ccp(_winSize.width*.85, _winSize.height*.85));
     sprite->setOpacity (150);
     this->addChild (sprite, _2brickIndex);
+
+    createMenu ();
+
+    createShaders ();
+
+    putGameName ();
+
+    initActions ();
 }
 
 
@@ -318,56 +317,6 @@ void MenuLayer::initActions()
 
 
 
-
-//FIXME: si vlc tiene pulse se parte el control de volumen
-void MenuLayer::initSounds()
-{
-    float efectVolume = 0.0;
-    float bgMusicVolume = 0.0;
-
-    if (CCUserDefault::sharedUserDefault()->isXMLFileExist())
-    {
-        efectVolume = CCUserDefault::sharedUserDefault()->
-                getFloatForKey ("m_fEfectVolume", .6);
-        bgMusicVolume = CCUserDefault::sharedUserDefault()->
-                getFloatForKey ("m_fBgMusicVolume", .4);
-    }
-    else
-    {
-        std::cerr << "User default configuration file not found" <<
-            std::endl;
-        exit (-1);
-    }
-
-    CC_AUDIO_->preloadBackgroundMusic
-            ("Sounds/MenuLayer/background.mp3");
-    CC_AUDIO_->playBackgroundMusic ("Sounds/MenuLayer/background.mp3");
-
-    CC_AUDIO_->setBackgroundMusicVolume (.0f);
-    CC_AUDIO_->setEffectsVolume (.0f);
-
-    CCControlSlider* bgVolumeControl = static_cast <CCControlSlider*>(
-        this->getChildByTag (bgMusicControlTag));
-    CCControlSlider* efectVolumeControl = static_cast <CCControlSlider*>(
-        this->getChildByTag (efectMusicControlTag));
-
-    efectVolumeControl->setValue (efectVolume);
-    bgVolumeControl->setValue (bgMusicVolume);
-
-    char val[200];
-    memset (val, 0, sizeof (val));
-    sprintf( val, "%.0f%%\n", bgMusicVolume*100);
-    m_pBgMusicVolumeLabel->setString (val);
-    memset (val, 0, sizeof (val));
-    sprintf( val, "%.0f%%\n", efectVolume*100);
-    m_pEfectVolumeLabel->setString (val);
-
-    updateVolumeValue (bgVolumeControl, bgMusicVolume);
-    updateVolumeValue (efectVolumeControl, efectVolume);
-}
-
-
-
 void MenuLayer::putGameName ()
 {
     // Upper Label
@@ -406,6 +355,54 @@ void MenuLayer::putGameName ()
     BChar->runAction(scale_4ever);
     FChar->runAction(jump_4ever);
     AChar->runAction(fade_4ever);
+}
+
+
+
+//FIXME: si vlc tiene pulse se parte el control de volumen
+void MenuLayer::initSounds()
+{
+    float efectVolume = 0.0;
+    float bgMusicVolume = 0.0;
+
+    if (CCUserDefault::sharedUserDefault()->isXMLFileExist())
+    {
+        efectVolume = CCUserDefault::sharedUserDefault()->
+                getFloatForKey ("m_fEfectVolume", .6);
+        bgMusicVolume = CCUserDefault::sharedUserDefault()->
+                getFloatForKey ("m_fBgMusicVolume", .4);
+    }
+    else
+    {
+        std::cerr << "User default configuration file not found" <<
+            std::endl;
+    }
+
+    CC_AUDIO_->preloadBackgroundMusic
+            ("Sounds/MenuLayer/background.mp3");
+    CC_AUDIO_->playBackgroundMusic ("Sounds/MenuLayer/background.mp3");
+
+    CC_AUDIO_->setBackgroundMusicVolume (.0f);
+    CC_AUDIO_->setEffectsVolume (.0f);
+
+    CCControlSlider* bgVolumeControl = static_cast <CCControlSlider*>(
+        this->getChildByTag (bgMusicControlTag));
+    CCControlSlider* efectVolumeControl = static_cast <CCControlSlider*>(
+        this->getChildByTag (efectMusicControlTag));
+
+    efectVolumeControl->setValue (efectVolume);
+    bgVolumeControl->setValue (bgMusicVolume);
+
+    char val[200];
+    memset (val, 0, sizeof (val));
+    sprintf( val, "%.0f%%\n", bgMusicVolume*100);
+    m_pBgMusicVolumeLabel->setString (val);
+    memset (val, 0, sizeof (val));
+    sprintf( val, "%.0f%%\n", efectVolume*100);
+    m_pEfectVolumeLabel->setString (val);
+
+    updateVolumeValue (bgVolumeControl, bgMusicVolume);
+    updateVolumeValue (efectVolumeControl, efectVolume);
 }
 
 
@@ -460,22 +457,22 @@ void MenuLayer::runSpeaker1_2()
         3,
         CCSizeMake (speaker1->getContentSize().width,
                     speaker1->getContentSize().height*.5),
-                    ccp (speaker1->getPositionX(),
-                         speaker1->getPositionY() + speaker1->getContentSize().height*.4),
-                    speaker1->getContentSize().width,
-                    5,
-                    speaker1->getContentSize().height*.1);
+        ccp (speaker1->getPositionX(),
+             speaker1->getPositionY() + speaker1->getContentSize().height*.4),
+        speaker1->getContentSize().width,
+        5,
+        speaker1->getContentSize().height*.1);
     speaker1->runAction ( CCRepeatForever::create(speaker1Action));
 
     CCRipple3D *speaker2Action = CCRipple3D::create(
         3,
         CCSizeMake (speaker2->getContentSize().width ,
                     speaker2->getContentSize().height*.5),
-                    ccp (speaker2->getPositionX(),
-                         speaker2->getPositionY() + speaker2->getContentSize().height*.4),
-                    speaker2->getContentSize().width,
-                    5,
-                    speaker2->getContentSize().height*.1);
+        ccp (speaker2->getPositionX(),
+             speaker2->getPositionY() + speaker2->getContentSize().height*.4),
+        speaker2->getContentSize().width,
+        5,
+        speaker2->getContentSize().height*.1);
     speaker2->runAction ( CCRepeatForever::create(speaker2Action));
     this->unschedule (schedule_selector(MenuLayer::runSpeaker1_2));
 }
@@ -492,14 +489,15 @@ void MenuLayer::runSpeaker3_4()
     this->addChild (speaker4, 0, brickSpeaker4Tag);
     speaker4->setPosition (ccp(_winSize.width*.501, _winSize.height*.602));
 
-        CCRipple3D *speaker3Action = CCRipple3D::create(
-            3,
-            CCSizeMake(speaker3->getContentSize().width ,speaker3->getContentSize().height*.5),
-            ccp(speaker3->getPositionX(),
-                speaker3->getPositionY() + speaker3->getContentSize().height*.4),
-            speaker3->getContentSize().width,
-            5,
-            speaker3->getContentSize().height*.1);
+    CCRipple3D *speaker3Action = CCRipple3D::create(
+        3,
+        CCSizeMake(speaker3->getContentSize().width ,
+                   speaker3->getContentSize().height*.5),
+        ccp(speaker3->getPositionX(),
+            speaker3->getPositionY() + speaker3->getContentSize().height*.4),
+        speaker3->getContentSize().width,
+        5,
+        speaker3->getContentSize().height*.1);
     speaker3->runAction ( CCRepeatForever::create(speaker3Action));
 
     CCRipple3D *speaker4Action = CCRipple3D::create(
@@ -525,13 +523,14 @@ void MenuLayer::runSpeaker5()
     speaker5->setPosition (ccp(_winSize.width*.76, _winSize.height*.604));
 
     CCRipple3D *speaker5Action = CCRipple3D::create(
-            4,
-            CCSizeMake(speaker5->getContentSize().width ,speaker5->getContentSize().height*.5),
-            ccp(speaker5->getPositionX(),
+        4,
+        CCSizeMake(speaker5->getContentSize().width ,
+                   speaker5->getContentSize().height*.5),
+        ccp(speaker5->getPositionX(),
             speaker5->getPositionY() + speaker5->getContentSize().height*.4),
-            speaker5->getContentSize().width,
-            8,
-            speaker5->getContentSize().height*.1);
+        speaker5->getContentSize().width,
+        8,
+        speaker5->getContentSize().height*.1);
     speaker5->runAction ( CCRepeatForever::create(speaker5Action));
 
     this->unschedule(schedule_selector(MenuLayer::runSpeaker5));
@@ -542,7 +541,7 @@ void MenuLayer::runSpeaker5()
 void MenuLayer::removeAllAnimations()
 {
     CCNode *s = NULL;
-    if ((s = getChildByTag (brickSpeaker4Tag)))
+    if ((s = getChildByTag (brickSpeaker1Tag)))
     {
         s->stopAllActions ();
         this->removeChild (s, true);
@@ -749,7 +748,7 @@ void MenuLayer::menuExitCallback(CCObject *pSender)
 {
     saveConext();
     CC_AUDIO_->end();
-    CCDirector::sharedDirector()->end();
+    CC_DIRECTOR_END();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif

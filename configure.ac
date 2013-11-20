@@ -33,8 +33,10 @@ AC_CANONICAL_BUILD
 
 case "${host_os}" in
     linux-gnu) PLATAFORM_LIBS_PATH=/lib/linux;
-    PLATAFORM=LINUX;;
-	*) AC_MSG_ERROR([${host_os} is an unknown system]) ;;
+        PLATAFORM=LINUX;;
+    linux-androideabi)
+        PLATAFORM=ANDROID;;
+    *) AC_MSG_ERROR([${host_os} is an unknown system]) ;;
 esac
 PLATAFORM_LIBS_PATH=/lib/linux
 AC_SUBST(PLATAFORM_LIBS_PATH)
@@ -47,6 +49,10 @@ AC_PROG_INSTALL
 AC_PROG_AWK
 AC_PROG_CPP
 AC_PROG_MKDIR_P
+#LT_INIT
+AC_PROG_MAKE_SET
+
+
 
 # Checks for libraries.
 PKG_CHECK_MODULES(GLS, [gl glew])
@@ -59,10 +65,14 @@ AC_CHECK_HEADERS([stdlib.h unistd.h ])
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL
 AC_C_INLINE
+AC_TYPE_SIZE_T
 
 # Checks for library functions.
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([memset])
 
 AC_CONFIG_FILES([Makefile
-                 src/plataform/linux/Makefile])
+                 src/plataform/linux/Makefile
+                 src/plataform/android/Makefile])
 AC_OUTPUT
 

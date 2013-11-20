@@ -35,8 +35,8 @@
 */
 enum 
 {
-    SIZE_X = 420,
-    SIZE_Y = 700,
+    SIZE_X = 320,
+    SIZE_Y = 480,
 };
 
 ShaderNode::ShaderNode ()

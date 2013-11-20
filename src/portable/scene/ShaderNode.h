@@ -32,27 +32,11 @@
 #ifndef SHADERNODEAA_H
 #define SHADERNODEAA_H
 
-//#include "CCGLProgram.h"
-#include "cocos2d.h"
-
-#include "CCPointExtension.h"
-#include "CCEventType.h"
-#include "CCNotificationCenter.h"
-
-#include "CCPlatformMacros.h"
-#include "CCDirector.h"
 #include "cocos2d.h"
 
 USING_NS_CC;
 
-#include "CCNode.h"
-
-#include "CCGLBufferedNode.h"
-
-#include "GL/gl.h"
-
 #include "../AppMacros.h"
-
 
 class ShaderNode : public CCNode
 {

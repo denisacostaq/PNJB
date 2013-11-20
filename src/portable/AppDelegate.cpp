@@ -36,6 +36,10 @@ AppDelegate::AppDelegate()
 {
 }
 
+AppDelegate::~AppDelegate()
+{
+}
+
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
@@ -60,6 +64,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	}
 	else
 	{
+		resolution = "IMG/320x480/";
 // 		if (screenSize.width > 640)
 // 		{
 // 			searchPath.push_back("hd");

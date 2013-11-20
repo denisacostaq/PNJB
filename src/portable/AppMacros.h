@@ -1,9 +1,10 @@
-/*! @file AppMacros.h Brebe del fichero.    
+/*! @file AppMacros.h definitions of macros.
     @author Alvaro Denis Acosta Quesada denisacostaq\@gmail.com    
     @date Thu Oct 24 23:18:00 CDT 2013
   
-    @brief Este fichero ...
- 
+    @brief This file rename some frequentile methods as macros, and too include
+    @brief \"ccMacros.h\" from cocos2dx
+
     @attention <h1><center>&copy; COPYRIGHT 
     GNU GENERAL PUBLIC LICENSE Version 2, June 1991</center></h1>
     
@@ -32,7 +33,7 @@
 #ifndef _APPMACROS_H
 #define _APPMACROS_H
 
-#include "CCFileUtils.h"
+#include "ccMacros.h"
 
 #define CC_OPENGL_VIEW_ cocos2d::CCEGLView::sharedOpenGLView()
 

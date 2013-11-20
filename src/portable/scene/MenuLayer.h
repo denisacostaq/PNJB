@@ -92,6 +92,12 @@ private:
     void initActions ();
 
 
+    /*!
+    * @brief This put the name of the game PNJB (PNJB is not jummping bunny).
+    */
+    void putGameName ();
+
+
     /*! @brief This initialice the sound
      * @brief This load the previous value saved, if not found set two default
      * @brief values.
@@ -99,12 +105,6 @@ private:
      * @return void
      */
     void initSounds ();
-    
-
-    /*!
-    * @brief This put the name of the game PNJB (PNJB is not jummping bunny).
-    */
-    void putGameName ();
 
 
     /**

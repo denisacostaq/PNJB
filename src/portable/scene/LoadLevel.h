@@ -43,9 +43,7 @@ public:
     LoadLevel(const LoadLevel& orig);
     virtual ~LoadLevel();
     
-    /*! Estas funciones no funciona ggg
-     * @warning std::cout << CCUserDefault::isXMLFileExist() << std::endl;
-     * @warning std::cout << CCUserDefault::sharedUserDefault()->isXMLFileExist() << std::endl;    
+    /*! @brief load the level saved, if not found load level1
      */
     CCScene* buildLevel ();
     

@@ -31,24 +31,23 @@
 
 #include "ShaderNode.h"
 
-///---------------------------------------
-// 
-// ShaderNode
-// 
-///---------------------------------------
+/** @enum This not are used
+*/
 enum 
 {
-    SIZE_X = 420,
-    SIZE_Y = 700,
+    SIZE_X = 320,
+    SIZE_Y = 480,
 };
 
-ShaderNode::ShaderNode()
-:m_center(vertex2(0.0f, 0.0f))
-,m_resolution(vertex2(0.0f, 0.0f))
-,m_time(0.0f)
-,m_uniformCenter(0)
-,m_uniformResolution(0)
-,m_uniformTime(0)
+ShaderNode::ShaderNode ()
+:m_center (vertex2(0.0f, 0.0f))
+,m_resolution (vertex2(0.0f, 0.0f))
+,m_time (0.0f)
+,m_uniformCenter (0)
+,m_uniformResolution (0)
+,m_uniformTime (0)
+,m_vertFileName ("")
+,m_fragFileName ("")
 {
 }
 
@@ -70,16 +69,16 @@ ShaderNode* ShaderNode::shaderNodeWithVertex(const char *vert, const char *frag)
 bool ShaderNode::initWithVertex(const char *vert, const char *frag)
 {
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
-                                                                  
-callfuncO_selector(ShaderNode::listenBackToForeground),
-                                                                  
-EVENT_COME_TO_FOREGROUND,
-                                                                  NULL);
+        callfuncO_selector(ShaderNode::listenBackToForeground),
+        EVENT_COME_TO_FOREGROUND,
+        NULL);
 
     loadShaderVertex(vert, frag);
 
     m_time = 0;
-    m_resolution = vertex2(SIZE_X, SIZE_Y);
+
+    m_resolution = vertex2(CC_DIRECTOR_->getWinSize ().width,
+                           CC_DIRECTOR_->getWinSize ().height);
 
     scheduleUpdate();
 
@@ -109,8 +108,8 @@ void ShaderNode::loadShaderVertex(const char *vert, const char *frag)
     shader->updateUniforms();
 
     m_uniformCenter = glGetUniformLocation(shader->getProgram(), "center");
-    m_uniformResolution = glGetUniformLocation(shader->getProgram(), 
-"resolution");
+    m_uniformResolution = glGetUniformLocation(shader->getProgram(),
+                                               "resolution");
     m_uniformTime = glGetUniformLocation(shader->getProgram(), "time");
 
     this->setShaderProgram(shader);
@@ -127,24 +126,24 @@ void ShaderNode::setPosition(const CCPoint &newPosition)
 {
     CCNode::setPosition(newPosition);
     CCPoint position = getPosition();
-    m_center = vertex2(position.x * CC_CONTENT_SCALE_FACTOR(), position.y * 
-CC_CONTENT_SCALE_FACTOR());
+    m_center = vertex2(position.x * CC_CONTENT_SCALE_FACTOR(),
+                       position.y * CC_CONTENT_SCALE_FACTOR());
 }
 
 void ShaderNode::draw()
 {
     CC_NODE_DRAW_SETUP();
 
-    float w = SIZE_X, h = SIZE_Y;
+    float w = m_resolution.x, h = m_resolution.y;
     GLfloat vertices[12] = {0,0, w,0, w,h, 0,0, 0,h, w,h};
 
     //
     // Uniforms
     //
-    getShaderProgram()->setUniformLocationWith2f(m_uniformCenter, m_center.x, 
-m_center.y);
-    getShaderProgram()->setUniformLocationWith2f(m_uniformResolution, 
-m_resolution.x, m_resolution.y);
+    getShaderProgram()->setUniformLocationWith2f(m_uniformCenter,
+                                                 m_center.x, m_center.y);
+    getShaderProgram()->setUniformLocationWith2f(m_uniformResolution,
+                                                 m_resolution.x, m_resolution.y);
 
     // time changes all the time, so it is Ok to call OpenGL directly, and not 
 	//the "cached" version
@@ -152,8 +151,8 @@ m_resolution.x, m_resolution.y);
 
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
 
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, 
-vertices);
+    glVertexAttribPointer(kCCVertexAttrib_Position,
+                          2, GL_FLOAT, GL_FALSE, 0, vertices);
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
     

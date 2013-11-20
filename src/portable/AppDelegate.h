@@ -1,10 +1,6 @@
 /*! @file AppDelegate.h Brebe del fichero.    
     @author Alvaro Denis Acosta Quesada denisacostaq\@gmail.com    
     @date Thu Oct 24 23:16:12 CDT 2013
-  
-    FIXME:
-    @warning It must be called before the application exit, or a memroy
-    @warning leak will be casued. CC_AUDIO_->end();
  
     @attention <h1><center>&copy; COPYRIGHT 
     GNU GENERAL PUBLIC LICENSE Version 2, June 1991</center></h1>
@@ -47,7 +43,10 @@ class AppDelegate : public cocos2d::CCApplication
 {
 public:
 
-    AppDelegate();
+    AppDelegate ();
+
+    //TODO: escribir aki.
+    ~AppDelegate ();
 
     /*! Implement CCDirector and CCScene init code here.
 	@brief Here is the place for you.

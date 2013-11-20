@@ -10,7 +10,7 @@
 #include "CCMenuItem.h"
 
 
-#include "GL/gl.h"
+//TODO: #include "GL/gl.h"
 
 #include "CCSpriteFrameCache.h"
 

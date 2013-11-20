@@ -64,3 +64,6 @@ nbproject/
 *.creator.user
 *.files
 *.includes
+
+src/plataform/android/project/
+src/plataform/android/backup/autotools/

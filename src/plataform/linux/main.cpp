@@ -11,8 +11,8 @@ int main(int argc, char **argv)
      // create the application instance
     AppDelegate app;
     CCEGLView* eglView = CC_OPENGL_VIEW_;
-    int width = 420;
-    int height = 700;
+    int width = 320;
+    int height = 480;
 	if(argc >1){
 		if(strcmp(argv[1],"z10") == 0)
 		{

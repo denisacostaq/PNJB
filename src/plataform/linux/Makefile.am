@@ -26,6 +26,9 @@ AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/base_nodes
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/touch_dispatcher
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/actions
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/shaders
+AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx
+
+AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/platform/third_party/linux/libtiff/include
 
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/external
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/external/Box2D
@@ -41,7 +44,7 @@ AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/extensions/GUI/CCControlExtension
 bin_PROGRAMS = pnjb
 
 pnjb_SOURCES = \
-	../../portable/AppMacros.h \
+		../../portable/AppMacros.h \
         main.cpp \
         ../../portable/AppDelegate.h \
         ../../portable/AppDelegate.cpp \
@@ -70,9 +73,9 @@ pnjb_SOURCES = \
         ../../portable/scene/Level1/L1GameOverScene.h \
         ../../portable/scene/Level1/L1GameOverScene.cpp \
         ../../portable/scene/Level3/L3GameLayer.h \
-	../../portable/scene/Level3/L3GameLayer.cpp \
-	../../portable/scene/Level3/L3Menu.h \
-	../../portable/scene/Level3/L3Menu.cpp
+		../../portable/scene/Level3/L3GameLayer.cpp \
+		../../portable/scene/Level3/L3Menu.h \
+		../../portable/scene/Level3/L3Menu.cpp
 
 
 pnjb_LDADD = \

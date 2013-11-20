@@ -39,7 +39,6 @@
 #include "SimpleAudioEngine.h"
 #include "Box2D/Box2D.h"
 
-
 #include "../../AppMacros.h"
 #include "L1CollisionListener.h"
 #include "L1GameOverScene.h"
@@ -48,9 +47,6 @@
 #include "L1Stone.h"
 #include "L1Splash.h"
 #include "L1Bunny.h"
-
-
-
 
 /**
  * @brief ...
@@ -61,7 +57,7 @@ namespace Level1 {
     USING_NS_CC;
     using namespace CocosDenshion;
 
-    //TODO: supongo que deberia usar ccToucheBegan no ccTouchesBegan ya k no 
+    //FIXME: supongo que deberia usar ccToucheBegan no ccTouchesBegan ya k no
     //necesito multitouch.
 
     /**
@@ -76,17 +72,17 @@ namespace Level1 {
             _menuTag
         };
 
-        /*! WOW
+        /*! @brief WOW
          * @brief ...
          */
         L1GameLayer();
 
-        /*! SSSSS
+        /*! @brief SSSSS
          * @brief ASDS
          */
         virtual bool init();
 
-        /**
+        /*! @brief
          * @brief ...
          * 
          * @return void
@@ -106,7 +102,6 @@ namespace Level1 {
         /**
          * @brief La musica de background para el L1GameLayer se deja la misma que
          * @brief tenia el L1Menu
-         * 
          * @return ...
          * 
          */

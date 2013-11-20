@@ -1,4 +1,53 @@
 #!/bin/bash
+COCOS2DX_ROOT=${COCOS2DX_ROOT=/storage/adacosta/WORK/COCO/cocos2d-x-2.2.0}
+NDK_ROOT=${NDK_ROOT=/storage/adacosta/WORK/Android/android-ndk-r9}
+
+function project_common ()
+{
+	mkdir -p m4
+	aclocal -I m4
+	autoheader
+	autoconf
+	automake -a
+
+	if ! [ -d $COCOS2DX_ROOT ]
+	then
+		echo -e "\e[1;36m"
+		read -p "please define COCOS2DX_ROOT:" COCOS2DX_ROOT
+		echo -e "\e[1;39m"
+	fi
+}
+
+function project_linux ()
+{
+	./configure COCOS2DX_ROOT=$COCOS2DX_ROOT --enable-debug=yes
+	make clean
+	make
+}
+
+function project_android ()
+{
+	pushd src/plataform/android
+	#TODO: source autogen.sh si uso esta llamada primero NDK_ROOT toma el valor de default config
+	if ! [ -d $NDK_ROOT ]
+	then
+		echo -e "\e[1;36m"
+		read -p "please define NDK_ROOT:" NDK_ROOT
+		echo -e "\e[1;39m"
+	fi
+	source autogen.sh
+	update_default_config $(from_plain_to_scaped $(get_node_of_default_config COCOS2DX_ROOT)) $(from_plain_to_scaped $COCOS2DX_ROOT)
+	update_default_config $(from_plain_to_scaped $(get_node_of_default_config NDK_ROOT)) $(from_plain_to_scaped $NDK_ROOT)
+	popd
+	export PATH=$NDK_ROOT/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86/bin:$PATH
+	export SYSROOT=$NDK_ROOT/platforms/android-18/arch-arm
+	./configure --host=arm-linux-androideabi CPPFLAGS="-I$NDK_ROOT/platforms/android-18/arch-arm/usr/include" CFLAGS="-nostdlib" LDFLAGS="-Wl,-rpath-link=$NDK_ROOT/platforms/android-18/arch-arm/usr/lib/ -L$NDK_ROOT/platforms/android-18/arch-arm/usr/lib" LIBS="-lc" COCOS2DX_ROOT=$COCOS2DX_ROOT --enable-debug=yes
+	make apk-create-project
+	make apk-build
+	make apk-run
+}
+
+project_common
 
 PLATAFORM="unknown"
 options="GNU/Linux Android"
@@ -8,10 +57,12 @@ until [ $finished == true ]; do
 		if [ "$opt" = "GNU/Linux" ] ; then
 			PLATAFORM="Linux"
 			finished=true
+			project_linux
 			break
 		elif [ "$opt" = "Android" ]; then
 			PLATAFORM="Android"
 			finished=true
+			project_android
 			break
 		else
 			clear
@@ -22,37 +73,8 @@ until [ $finished == true ]; do
 done
 
 
-if [ "$PLATAFORM" = "unknown" ]; then
-	echo "Do you need specific the plataform"
-	exit 1
-elif [ "$PLATAFORM" = "Android" ]; then
-	echo "Android currently not supported"
-	exit 1
-fi
 
-	
-if [ -z "${COCOS2DX_ROOT+aaa}" ];then
-	read -p "COCOS2DX_ROOT not defined. Please inter the path of COCOS2DX_ROOT:" COCOS2DX_ROOT
-fi
-
-COCOS2DX_ROOT=/storage/adacosta/WORK/cocos2d-x-2.2.0
-
-mkdir -p m4
-aclocal -I m4
-autoheader
-autoconf
-automake -a
-#export $COCOS2DX_ROOT
-./configure COCOS2DX_ROOT=$COCOS2DX_ROOT
-make clean
 rm -rf doc/html
 make html-doc
-make
 make dist
 make details
-
-
-
-#if [ -z "${NDK_ROOT+aaa}" ];then
-#	read -p "NDK_ROOT not defined. Please inter the path of NDK_ROOT:" NDK_ROOT
-#fi

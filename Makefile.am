@@ -1,7 +1,17 @@
-SUBDIRS = src/plataform/linux
-EXTRA_DIST = README THANKS TODO HACKING MAINTAINERS Resources doc autogen.sh
+SUBDIRS=src/plataform/linux
+#SUBDIRS=src/plataform/android
+#ifeq ($(TARGET_CPU),x86)
+# TARGET_CPU_IS_X86 := 1
+#else ifeq ($(TARGET_CPU),x86_64)
+#  TARGET_CPU_IS_X86 := 1
+#else
+#  TARGET_CPU_IS_X86 := 0
+
+EXTRA_DIST = README THANKS TODO HACKING MAINTAINERS Resources doc autogen.sh src/plataform/android
 #EXTRA_DIST += pnjb.config               pnjb.files        pnjb.includes               pnjb.creator
 CLEANFILES = *~
+
+ACLOCAL_AMFLAGS = -I m4
 
 details:
 	@echo "Building from:"
@@ -33,11 +43,26 @@ apk:
 #dist_sounds_DATA = sounds/whirl.ogg
 #see Section 14.2 [Fine-grained Distribution Control], page 98
 
-#ifeq ($(TARGET_CPU),x86)
-#  TARGET_CPU_IS_X86 := 1
-#else ifeq ($(TARGET_CPU),x86_64)
-#  TARGET_CPU_IS_X86 := 1
-#else
-#  TARGET_CPU_IS_X86 := 0
 
+apk-create-project:
+	make -C src/plataform/android apk-create-project
 
+apk-run:
+	make -C src/plataform/android apk-run
+apk-install:
+	make -C src/plataform/android apk-install
+
+apk-uninstall:
+	make -C src/plataform/android apk-uninstall
+
+apk-clean:
+	make -C src/plataform/android apk-clean
+
+apk-logcat:
+	make -C src/plataform/android apk-logcat
+
+apk-build:
+	make -C src/plataform/android apk-build
+
+apk-purge_project:
+	make -C src/plataform/android apk-purge_project

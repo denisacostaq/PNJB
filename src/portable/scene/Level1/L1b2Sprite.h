@@ -31,8 +31,8 @@
 #ifndef B2SPRITE_H
 #define B2SPRITE_H
 
-#include "CCSprite.h"
-#include "Dynamics/b2Body.h"
+#include "cocos2d.h"
+#include "Box2D/Box2D.h"
 
 #include "CCPlatformMacros.h"
 namespace Level1 {

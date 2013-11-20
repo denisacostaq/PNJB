@@ -26,9 +26,6 @@ AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/base_nodes
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/touch_dispatcher
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/actions
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/shaders
-AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx
-
-AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/cocos2dx/platform/third_party/linux/libtiff/include
 
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/external
 AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/external/Box2D

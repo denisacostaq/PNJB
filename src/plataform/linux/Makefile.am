@@ -41,7 +41,7 @@ AM_CPPFLAGS += -I $(COCOS2DX_ROOT)/extensions/GUI/CCControlExtension
 bin_PROGRAMS = pnjb
 
 pnjb_SOURCES = \
-	../../portable/AppMacros.h \
+		../../portable/AppMacros.h \
         main.cpp \
         ../../portable/AppDelegate.h \
         ../../portable/AppDelegate.cpp \
@@ -70,9 +70,9 @@ pnjb_SOURCES = \
         ../../portable/scene/Level1/L1GameOverScene.h \
         ../../portable/scene/Level1/L1GameOverScene.cpp \
         ../../portable/scene/Level3/L3GameLayer.h \
-	../../portable/scene/Level3/L3GameLayer.cpp \
-	../../portable/scene/Level3/L3Menu.h \
-	../../portable/scene/Level3/L3Menu.cpp
+		../../portable/scene/Level3/L3GameLayer.cpp \
+		../../portable/scene/Level3/L3Menu.h \
+		../../portable/scene/Level3/L3Menu.cpp
 
 
 pnjb_LDADD = \
